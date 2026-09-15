@@ -1,13 +1,14 @@
 window.WORD_DATA_READY = (async () => {
+  const VERSION = '20260915-2';
   const parts = await Promise.all(
     Array.from({ length: 12 }, (_, i) =>
-      fetch(`./data/words-${String(i).padStart(2, '0')}.txt`).then((r) => {
+      fetch(`./data/words-${String(i).padStart(2, '0')}.txt?v=${VERSION}`, { cache: 'no-store' }).then((r) => {
         if (!r.ok) throw new Error(`词库加载失败：${r.status}`);
         return r.text();
       })
     )
   );
-  const encoded = parts.join('').trim();
+  const encoded = parts.join('').replace(/\s+/g, '');
   const binary = Uint8Array.from(atob(encoded), (c) => c.charCodeAt(0));
   if (!("DecompressionStream" in window)) {
     throw new Error('当前浏览器版本过旧，请使用最新版 Edge / Chrome / Firefox / Safari。');
