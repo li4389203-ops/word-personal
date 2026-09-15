@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>每日单词 · 2027 考研英语二</title>
+  <meta name="description" content="按学习日历展示每日考研英语二单词，支持日期切换、难度筛选、发音与学习进度。" />
+  <script>
+    (() => {
+      const saved = localStorage.getItem('daily-words:theme');
+      const theme = saved || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="每日单词首页">
+        <span class="brand-mark">D</span>
+        <span class="brand-copy"><strong>Daily Words</strong><small>2027 考研英语二</small></span>
+      </a>
+      <div class="top-actions">
+        <button class="icon-text-button" id="themeToggle" type="button" aria-label="切换黑白主题" title="切换主题">
+          <span class="theme-dot" aria-hidden="true"></span><span id="themeLabel">浅色</span>
+        </button>
+        <button class="ghost-button" id="todayBtn" type="button">今天</button>
+        <label class="date-control" aria-label="选择日期">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>
+          <input id="dateInput" type="date" />
+        </label>
+      </div>
+    </header>
+
+    <main>
+      <section class="overview">
+        <div class="overview-main">
+          <div class="eyebrow" id="eyebrow">DAY 62 · 加强期</div>
+          <div class="title-row">
+            <h1 id="dateTitle">9月15日 <span>星期二</span></h1>
+            <div class="hero-actions">
+              <button class="primary-button" id="continueBtn" type="button">继续学习</button>
+              <button class="secondary-button" id="meaningToggle" type="button">隐藏释义</button>
+            </div>
+          </div>
+          <p id="daySummary">今天需要学习 70 个新词。</p>
+        </div>
+
+        <div class="progress-panel">
+          <div class="progress-ring" id="progressRing" style="--progress:0">
+            <div class="progress-inner"><strong id="progressPercent">0%</strong><span>今日完成</span></div>
+          </div>
+          <div class="progress-copy">
+            <div><strong id="doneCount">0</strong><span>已掌握</span></div>
+            <div><strong id="remainCount">70</strong><span>待学习</span></div>
+            <div><strong id="totalCount">3866</strong><span>总词库</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline-section" aria-label="近期学习日历">
+        <button class="nav-arrow" id="prevDay" type="button" aria-label="上一天">←</button>
+        <div class="date-strip" id="dateStrip"></div>
+        <button class="nav-arrow" id="nextDay" type="button" aria-label="下一天">→</button>
+      </section>
+
+      <section class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          <input id="searchInput" type="search" placeholder="搜索单词或释义" autocomplete="off" />
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all" type="button">全部</button>
+          <button class="filter" data-filter="A" type="button">A 高频</button>
+          <button class="filter" data-filter="B" type="button">B 核心</button>
+          <button class="filter" data-filter="C" type="button">C 中频</button>
+          <button class="filter" data-filter="D" type="button">D 认读</button>
+          <button class="filter" data-filter="unlearned" type="button">未掌握</button>
+        </div>
+        <div class="result-count" id="resultCount">70 个单词</div>
+      </section>
+
+      <section class="word-grid" id="wordGrid" aria-live="polite"></section>
+      <section class="empty-state hidden" id="emptyState">
+        <div class="rest-icon">—</div>
+        <h2 id="emptyTitle">今天是休息日</h2>
+        <p id="emptyText">不安排新词，保持轻量复习即可。</p>
+      </section>
+    </main>
+
+    <footer><span>2027考研英语二 · 中文释义逐词复核版</span><span id="footerRange"></span></footer>
+  </div>
+
+  <script src="./words-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
