@@ -9,3 +9,5 @@
 - 数据来自 `2027考研英语二_中文释义逐词复核版.xlsx`
 
 GitHub Pages 部署工作流位于 `.github/workflows/pages.yml`。
+
+在线地址：https://li4389203-ops.github.io/word-personal/
